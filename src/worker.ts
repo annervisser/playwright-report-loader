@@ -43,7 +43,8 @@ self.onfetch = function (event) {
         url: request.url,
         referrer: request.referrer,
     });
-    if (request.url.startsWith(self.registration.scope)) {
+    let scopeUrl = self.registration.scope;
+    if (request.url.startsWith(scopeUrl)) {
         const url = new URL(request.url);
         const referrerPath = new URL(request.referrer).pathname;
         const relativePath = url.pathname.substring(referrerPath.length - 1);
@@ -60,7 +61,7 @@ self.onfetch = function (event) {
         const response = await fetch(new URL(document.location.href).searchParams.get('trace'));
         const blob = await response.blob();
         const url = URL.createObjectURL(blob);
-        document.location.href = document.location.origin + '/trace/?trace=' + url;
+        document.location.href = '${scopeUrl}trace/?trace=' + url;
     })();
 </script>
 </body>

@@ -2,6 +2,13 @@ const loadButton = document.querySelector<HTMLButtonElement>('#load');
 const urlInput = document.querySelector<HTMLInputElement>('#zipUrl');
 loadButton.disabled = true;
 
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (!urlInput.value) {
+        urlInput.value = document.location.href + 'playwright-html.zip';
+    }
+})
+
 const workerURL = './worker.js';
 navigator.serviceWorker.register(workerURL)
     .then(() => console.log('Installing...'))
@@ -25,7 +32,7 @@ navigator.serviceWorker.ready.then(() => {
                     const url = URL.createObjectURL(blob);
                     console.log('Link to zip:', url)
 
-                    document.location.href = `/${id}/`;
+                    document.location.href = `./${id}/`;
                     // const iframe = document.createElement('iframe');
                     // iframe.src = `/${id}/`;
                     // let iframeContainer = document.querySelector('#iframe-container');
