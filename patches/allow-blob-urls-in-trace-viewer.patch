@@ -1,0 +1,14 @@
+diff --git a/packages/trace-viewer/src/ui/workbench.tsx b/packages/trace-viewer/src/ui/workbench.tsx
+--- a/packages/trace-viewer/src/ui/workbench.tsx	(revision 347544db0912d684bf807dd43433106c89da8a99)
++++ b/packages/trace-viewer/src/ui/workbench.tsx	(date 1665574115552)
+@@ -92,9 +92,7 @@
+       }
+     }
+ 
+-    // Don't re-use blob file URLs on page load (results in Fetch error)
+-    if (!newTraceURLs.some(url => url.startsWith('blob:')))
+-      setTraceURLs(newTraceURLs);
++    setTraceURLs(newTraceURLs);
+   }, [setTraceURLs]);
+ 
+   React.useEffect(() => {

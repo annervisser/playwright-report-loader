@@ -1,0 +1,25 @@
+{
+  "name": "zip-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "clean": "rm -rf dist && mkdir dist",
+    "patch-trace-viewer": "./download-and-patch-trace-viewer.sh",
+    "copy-public-assets": "cp -r ./public/* ./dist/",
+    "build": "esbuild --bundle ./src/worker.ts ./src/client/index.ts --platform=browser --outdir=dist",
+    "dist": "npm run clean && npm run patch-trace-viewer && npm run build && npm run copy-public-assets",
+    "serve": "http-server ./dist -c=1 -a localhost"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@zip.js/zip.js": "^2.6.43"
+  },
+  "devDependencies": {
+    "esbuild": "^0.15.10",
+    "http-server": "^14.1.1",
+    "typescript": "^4.8.4"
+  }
+}
