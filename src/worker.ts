@@ -80,7 +80,7 @@ self.onfetch = function (event) {
 };
 
 async function replaceCache(url: string) {
-    const response = await fetch(url, {mode: 'no-cors'});
+    const response = await fetch(url);
     const blob = await response.blob();
     const reader = new zip.ZipReader(new zip.BlobReader(blob));
     const entries = await reader.getEntries();

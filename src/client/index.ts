@@ -1,5 +1,6 @@
 const loadButton = document.querySelector<HTMLButtonElement>('#load');
 const urlInput = document.querySelector<HTMLInputElement>('#zipUrl');
+const fileInput = document.querySelector<HTMLInputElement>('#zipFile');
 loadButton.disabled = true;
 
 
@@ -19,7 +20,19 @@ navigator.serviceWorker.ready.then(() => {
     let broadcast: BroadcastChannel;
 
     loadButton.onclick = () => {
-        const url = urlInput.value;
+        let url: string;
+        if (fileInput.files.length > 0) {
+            const file = fileInput.files[0];
+            url = URL.createObjectURL(file);
+        } else {
+            url = urlInput.value;
+        }
+
+        if (!url) {
+            throw new Error('No url or file provided');
+        }
+        console.log('url: ', url);
+        
         const id = crypto.randomUUID();
         broadcast?.close();
         broadcast = new BroadcastChannel(id);
